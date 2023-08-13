@@ -15,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { Router, RouterModule } from '@angular/router';
 
 import { AuthService, Credential } from '../../../core/services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 interface SignUpForm {
   names: FormControl<string>;
@@ -64,6 +65,7 @@ export default class SignUpComponent {
 
   private authService = inject(AuthService);
   private _router = inject(Router);
+  private _snackBar = inject(MatSnackBar);
 
   get isEmailValid(): string | boolean {
     const control = this.form.get('email');
@@ -88,13 +90,23 @@ export default class SignUpComponent {
     };
 
     try {
-      const userCredentials = await this.authService.signUpWithEmailAndPassword(
-        credential
-      );
-      console.log(userCredentials);
-      this._router.navigateByUrl('/');
+      await this.authService.signUpWithEmailAndPassword(credential);
+
+      const snackBarRef = this.openSnackBar();
+
+      snackBarRef.afterDismissed().subscribe(() => {
+        this._router.navigateByUrl('/');
+      });
     } catch (error) {
       console.error(error);
     }
+  }
+
+  openSnackBar() {
+    return this._snackBar.open('Succesfully Sign up 😀', 'Close', {
+      duration: 2500,
+      verticalPosition: 'top',
+      horizontalPosition: 'end',
+    });
   }
 }
