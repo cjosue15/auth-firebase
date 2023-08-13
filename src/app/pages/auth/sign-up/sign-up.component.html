@@ -1,0 +1,53 @@
+<div class="form">
+  <div class="form__container">
+    <h1>Sign up</h1>
+    <form [formGroup]="form" (ngSubmit)="signUp()">
+      <div>
+        <mat-form-field>
+          <mat-label>Nombres</mat-label>
+          <input matInput />
+          <mat-error></mat-error>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field>
+          <mat-label>Apellidos</mat-label>
+          <input matInput />
+          <mat-error></mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput />
+          <mat-error></mat-error>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field>
+          <mat-label>Enter your password</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'" />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="hide = !hide"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide"
+          >
+            <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <button mat-flat-button color="accent" type="submit">Sign up</button>
+      </div>
+    </form>
+    <hr />
+    <span class="small-text log-in-redirect"
+      >Already have an account? <a routerLink="/auth/log-in">Log in</a></span
+    >
+  </div>
+</div>
