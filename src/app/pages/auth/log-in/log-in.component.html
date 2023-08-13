@@ -1,19 +1,23 @@
 <div class="form">
   <div class="form__container">
     <h1>Log in</h1>
-    <form>
+    <form [formGroup]="form" (ngSubmit)="logIn()">
       <div>
         <mat-form-field>
           <mat-label>Email</mat-label>
-          <input matInput />
-          <mat-error></mat-error>
+          <input matInput formControlName="email" />
+          <mat-error *ngIf="isEmailValid as messsage">{{ messsage }}</mat-error>
         </mat-form-field>
       </div>
 
       <div>
         <mat-form-field>
           <mat-label>Enter your password</mat-label>
-          <input matInput [type]="hide ? 'password' : 'text'" />
+          <input
+            matInput
+            [type]="hide ? 'password' : 'text'"
+            formControlName="password"
+          />
           <button
             mat-icon-button
             matSuffix
@@ -23,6 +27,7 @@
           >
             <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
           </button>
+          <mat-error>This field is required</mat-error>
         </mat-form-field>
       </div>
 

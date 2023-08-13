@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   standalone: true,
@@ -23,5 +24,13 @@ import { MatToolbarModule } from '@angular/material/toolbar';
   ],
 })
 export default class HomeComponent {
-  logOut(): void {}
+  private authservice = inject(AuthService);
+
+  async logOut(): Promise<void> {
+    try {
+      await this.authservice.logOut();
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }

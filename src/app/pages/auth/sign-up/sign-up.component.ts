@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { NgIf } from '@angular/common';
 import {
   FormBuilder,
   FormControl,
@@ -11,7 +12,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+
+import { AuthService, Credential } from '../../../core/services/auth.service';
 
 interface SignUpForm {
   names: FormControl<string>;
@@ -29,6 +32,7 @@ interface SignUpForm {
     MatButtonModule,
     ReactiveFormsModule,
     RouterModule,
+    NgIf,
   ],
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -58,8 +62,39 @@ export default class SignUpComponent {
     }),
   });
 
-  signUp(): void {
+  private authService = inject(AuthService);
+  private _router = inject(Router);
+
+  get isEmailValid(): string | boolean {
+    const control = this.form.get('email');
+
+    const isInvalid = control?.invalid && control.touched;
+
+    if (isInvalid) {
+      return control.hasError('required')
+        ? 'This field is required'
+        : 'Enter a valid email';
+    }
+
+    return false;
+  }
+
+  async signUp(): Promise<void> {
     if (this.form.invalid) return;
-    console.log(this.form.value);
+
+    const credential: Credential = {
+      email: this.form.value.email || '',
+      password: this.form.value.password || '',
+    };
+
+    try {
+      const userCredentials = await this.authService.signUpWithEmailAndPassword(
+        credential
+      );
+      console.log(userCredentials);
+      this._router.navigateByUrl('/');
+    } catch (error) {
+      console.error(error);
+    }
   }
 }
