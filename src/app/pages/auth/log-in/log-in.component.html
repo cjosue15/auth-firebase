@@ -1,0 +1,39 @@
+<div class="form">
+  <div class="form__container">
+    <h1>Log in</h1>
+    <form>
+      <div>
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput />
+          <mat-error></mat-error>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field>
+          <mat-label>Enter your password</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'" />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="hide = !hide"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide"
+          >
+            <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <button mat-flat-button color="accent" type="submit">Log in</button>
+      </div>
+    </form>
+    <hr />
+    <span class="small-text log-in-redirect"
+      >Don’t have an account yet?
+      <a routerLink="/auth/sign-up">Sign up</a></span
+    >
+  </div>
+</div>
