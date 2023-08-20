@@ -15,7 +15,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { Router, RouterModule } from '@angular/router';
 
 import { AuthService, Credential } from '../../../core/services/auth.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { ButtonProviders } from '../components/button-providers/button-providers.component';
 
 interface SignUpForm {
   names: FormControl<string>;
@@ -34,6 +35,8 @@ interface SignUpForm {
     ReactiveFormsModule,
     RouterModule,
     NgIf,
+    MatSnackBarModule,
+    ButtonProviders,
   ],
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',

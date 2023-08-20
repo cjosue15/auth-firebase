@@ -1,0 +1,32 @@
+.button-providers {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+
+  button {
+    background: transparent;
+    font-family: inherit;
+    border: 1px solid white;
+    width: 100%;
+    max-width: 250px;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    min-height: 48px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all ease-in 0.25s;
+
+    &:hover {
+      background: var(--text);
+      color: var(--dark-text);
+    }
+
+    svg {
+      margin-right: 20px;
+    }
+  }
+}

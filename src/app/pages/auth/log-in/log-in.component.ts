@@ -15,6 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { AuthService, Credential } from '../../../core/services/auth.service';
+import { ButtonProviders } from '../components/button-providers/button-providers.component';
 
 interface LogInForm {
   email: FormControl<string>;
@@ -32,6 +33,7 @@ interface LogInForm {
     RouterModule,
     NgIf,
     MatSnackBarModule,
+    ButtonProviders,
   ],
   selector: 'app-log-in',
   templateUrl: './log-in.component.html',
